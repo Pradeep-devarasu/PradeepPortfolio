@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
     :root {
@@ -429,6 +431,78 @@
     .certcard:hover .certcard-ico { transform:scale(1.1); }
     .cert-name { font-family:var(--font-head); font-size:.9rem; font-weight:700; color:var(--white); margin-bottom:.2rem; }
     .cert-src { font-family:var(--font-mono); font-size:.72rem; color:var(--w50); }
+
+    /* ── CERT MODAL ── */
+    .cert-modal-ov {
+      position:fixed; inset:0; background:rgba(0,0,0,.92);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      z-index:3000; display:flex; align-items:center; justify-content:center;
+      padding:1rem; opacity:0; pointer-events:none; transition:opacity .3s;
+    }
+    .cert-modal-ov.open { opacity:1; pointer-events:auto; }
+    .cert-mbox {
+      background:var(--bg3); border:1px solid var(--border2);
+      border-radius:var(--r2); width:100%; max-width:860px;
+      max-height:90vh; display:flex; flex-direction:column;
+      transform:translateY(24px) scale(.96);
+      transition:transform .35s var(--ease);
+      box-shadow:0 24px 60px rgba(0,0,0,.7); overflow:hidden;
+    }
+    .cert-modal-ov.open .cert-mbox { transform:translateY(0) scale(1); }
+    .cert-mhead {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.25rem 1.5rem; border-bottom:1px solid var(--border);
+      background:linear-gradient(135deg,var(--bg3),var(--bg2));
+      flex-shrink:0;
+    }
+    .cert-mhead-info { display:flex; align-items:center; gap:12px; }
+    .cert-mhead-ico {
+      width:40px; height:40px; background:var(--glow2); border:1px solid rgba(124,106,247,.2);
+      border-radius:var(--r); display:flex; align-items:center; justify-content:center;
+      font-size:1rem; color:var(--accent2); flex-shrink:0;
+    }
+    .cert-mhead-title { font-family:var(--font-head); font-size:.95rem; font-weight:700; color:var(--white); }
+    .cert-mhead-sub { font-family:var(--font-mono); font-size:.68rem; color:var(--w50); margin-top:2px; }
+    .cert-mhead-actions { display:flex; align-items:center; gap:.5rem; }
+    .cert-btn-open {
+      display:inline-flex; align-items:center; gap:6px;
+      background:var(--accent); color:var(--white); border:none;
+      font-size:.75rem; font-weight:600; padding:7px 14px;
+      border-radius:var(--r); cursor:pointer; font-family:var(--font-body);
+      text-decoration:none; transition:all .3s;
+    }
+    .cert-btn-open:hover { background:var(--accent2); color:var(--white); }
+    .cert-mbtn-close {
+      background:none; border:none; color:var(--w50); cursor:pointer;
+      font-size:1.1rem; padding:6px 10px; border-radius:var(--r); transition:all .3s;
+    }
+    .cert-mbtn-close:hover { color:var(--accent2); background:var(--w05); }
+    .cert-mbody { flex:1; overflow:hidden; position:relative; min-height:300px; }
+    .cert-iframe {
+      width:100%; height:100%; min-height:500px; border:none; display:block;
+    }
+    .cert-loading {
+      position:absolute; inset:0; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:1rem; background:var(--bg3);
+    }
+    .cert-loading i { font-size:2rem; color:var(--accent2); animation:spin 1s linear infinite; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .cert-loading p { font-family:var(--font-mono); font-size:.78rem; color:var(--w50); }
+    .cert-no-link {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:1rem; padding:3rem; text-align:center; min-height:300px;
+    }
+    .cert-no-link i { font-size:2.5rem; color:var(--w25); }
+    .cert-no-link p { font-size:.85rem; color:var(--w50); line-height:1.7; }
+
+    /* Clickable cert card */
+    .certcard { cursor:pointer; }
+    .certcard .cert-click-hint {
+      font-family:var(--font-mono); font-size:.65rem; color:var(--accent2);
+      margin-top:.3rem; display:flex; align-items:center; gap:4px;
+      opacity:0; transition:opacity .3s;
+    }
+    .certcard:hover .cert-click-hint { opacity:1; }
 
     .toolcard {
       background:var(--bg3); border:1px solid var(--border);
@@ -1010,43 +1084,8 @@
     <p class="sec-sub rv-l">Professional certifications and tools that validate my technical expertise.</p>
 
     <div class="sub-head rv">Certifications</div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="certcard rv">
-          <div class="certcard-ico"><i class="fab fa-python"></i></div>
-          <div>
-            <div class="cert-name">Python Programming</div>
-            <div class="cert-src">Professional Certificate</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="certcard rv d2">
-          <div class="certcard-ico"><i class="fab fa-html5"></i></div>
-          <div>
-            <div class="cert-name">HTML &amp; CSS</div>
-            <div class="cert-src">Professional Certificate</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="certcard rv d3">
-          <div class="certcard-ico"><i class="fas fa-database"></i></div>
-          <div>
-            <div class="cert-name">PostgreSQL</div>
-            <div class="cert-src">Professional Certificate</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="certcard rv d4">
-          <div class="certcard-ico"><i class="fas fa-code"></i></div>
-          <div>
-            <div class="cert-name">Django Framework</div>
-            <div class="cert-src">Professional Certificate</div>
-          </div>
-        </div>
-      </div>
+    <div class="row" id="certGrid">
+      <!-- Dynamically rendered by JS -->
     </div>
 
     <div class="sub-head rv">Tools &amp; Technologies</div>
@@ -1139,6 +1178,34 @@
   </div>
 </div>
 
+<!-- CERTIFICATE MODAL -->
+<div class="cert-modal-ov" id="certModal">
+  <div class="cert-mbox">
+    <div class="cert-mhead">
+      <div class="cert-mhead-info">
+        <div class="cert-mhead-ico" id="certModalIco"><i class="fas fa-certificate"></i></div>
+        <div>
+          <div class="cert-mhead-title" id="certModalTitle">Certificate</div>
+          <div class="cert-mhead-sub" id="certModalSub">Professional Certificate</div>
+        </div>
+      </div>
+      <div class="cert-mhead-actions">
+        <a id="certOpenBtn" href="#" target="_blank" class="cert-btn-open">
+          <i class="fas fa-external-link-alt"></i> Open in Drive
+        </a>
+        <button class="cert-mbtn-close" id="certModalClose"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="cert-mbody" id="certModalBody">
+      <div class="cert-loading" id="certLoading">
+        <i class="fas fa-circle-notch"></i>
+        <p>Loading certificate...</p>
+      </div>
+      <iframe id="certIframe" class="cert-iframe" style="display:none;" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -1155,23 +1222,184 @@
 </footer>
 
 <script>
-  // Scroll reveal
+  // ═══════════════════════════════════════════════════════
+  //  EMAILJS CONFIGURATION — replace with your 3 IDs
+  //  Get these from https://dashboard.emailjs.com
+  // ═══════════════════════════════════════════════════════
+  const EMAILJS_PUBLIC_KEY  = '2Hr2NzDWHcTj_oI1H';       // Line 1224 — Account → General → Public Key
+  const EMAILJS_SERVICE_ID  = 'service_vkl3m1m';       // Line 1225 — Email Services → your service
+  const EMAILJS_TEMPLATE_ID = 'template_2bmjx2b';      // Line 1226 — Email Templates → Settings tab
+
+  // Initialise EmailJS with your public key
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // ═══════════════════════════════════════════════════════
+  //  CERTIFICATE DATA — update driveId with your file IDs
+  //  How to get a File ID:
+  //    1. Upload certificate to Google Drive
+  //    2. Right-click → Share → "Anyone with the link" → Viewer
+  //    3. Copy share URL: https://drive.google.com/file/d/FILE_ID_HERE/view
+  //    4. Paste just the FILE_ID_HERE part below
+  //  To add a new certificate: add a new object to this array
+  // ═══════════════════════════════════════════════════════
+  const CERTIFICATES = [
+    {
+      name:    'Python Programming',
+      issuer:  'Professional Certificate',
+      icon:    'fab fa-python',
+      driveId: 'https://drive.google.com/file/d/1mbhYzCfWyKPbo_mhtU1vgZueejH7uDTI/view?usp=sharing'   // ← replace this
+    },
+    {
+      name:    'HTML & CSS',
+      issuer:  'Professional Certificate',
+      icon:    'fab fa-html5',
+      driveId: 'https://drive.google.com/file/d/1xcKPG4nchEGdgEvEd2WbMXQ_i4gn85k_/view?usp=sharing'  // ← replace this
+    },
+    {
+      name:    'PostgreSQL',
+      issuer:  'Professional Certificate',
+      icon:    'fas fa-database',
+      driveId: 'https://drive.google.com/file/d/1zQe-SvjFkKXNpdnf6Mt_RtD-keCxoLeH/view?usp=drive_link' // ← replace this
+    },
+    {
+      name:    'Django Framework',
+      issuer:  'Professional Certificate',
+      icon:    'fas fa-code',
+      driveId: 'https://drive.google.com/file/d/1HfPo7SsKGqTkdUr4dAGrYu6I1VqwSIR6/view?usp=drive_link'    // ← replace this
+    }
+    // Add more certificates here:
+    // { name: 'New Cert', issuer: 'Issuer Name', icon: 'fas fa-star', driveId: 'FILE_ID' },
+  ];
+
+  // ── Build certificate cards from array ──
+  const certGrid = document.getElementById('certGrid');
+  const delayClasses = ['rv', 'rv d2', 'rv d3', 'rv d4', 'rv d5', 'rv d6'];
+  CERTIFICATES.forEach((cert, i) => {
+    const col = document.createElement('div');
+    col.className = 'col-md-6';
+    col.innerHTML = `
+      <div class="certcard ${delayClasses[i] || 'rv'}" data-cert-index="${i}" role="button" tabindex="0" aria-label="View ${cert.name} certificate">
+        <div class="certcard-ico"><i class="${cert.icon}"></i></div>
+        <div>
+          <div class="cert-name">${cert.name}</div>
+          <div class="cert-src">${cert.issuer}</div>
+          <div class="cert-click-hint"><i class="fas fa-eye"></i> View Certificate</div>
+        </div>
+      </div>`;
+    certGrid.appendChild(col);
+  });
+
+  // ── Certificate Modal Logic ──
+  const certModal    = document.getElementById('certModal');
+  const certIframe   = document.getElementById('certIframe');
+  const certLoading  = document.getElementById('certLoading');
+  const certModalTitle = document.getElementById('certModalTitle');
+  const certModalSub   = document.getElementById('certModalSub');
+  const certModalIco   = document.getElementById('certModalIco');
+  const certOpenBtn    = document.getElementById('certOpenBtn');
+  const certModalClose = document.getElementById('certModalClose');
+
+  function openCertModal(index) {
+    const cert = CERTIFICATES[index];
+    if (!cert) return;
+
+    // Update modal header
+    certModalTitle.textContent = cert.name;
+    certModalSub.textContent   = cert.issuer;
+    certModalIco.innerHTML     = `<i class="${cert.icon}"></i>`;
+
+    // Show modal
+    certModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Check if Drive ID is set
+    if (!cert.driveId || cert.driveId.startsWith('YOUR_')) {
+      certLoading.style.display  = 'none';
+      certIframe.style.display   = 'none';
+      certOpenBtn.href = '#';
+      const body = document.getElementById('certModalBody');
+      // Show placeholder message
+      let noLink = body.querySelector('.cert-no-link');
+      if (!noLink) {
+        noLink = document.createElement('div');
+        noLink.className = 'cert-no-link';
+        noLink.innerHTML = `
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Certificate not linked yet.<br>
+          Update the <code>driveId</code> for <strong>${cert.name}</strong> in the CERTIFICATES array.</p>`;
+        body.appendChild(noLink);
+      } else {
+        noLink.style.display = 'flex';
+      }
+      return;
+    }
+
+    // Hide any no-link placeholder
+    const noLink = document.getElementById('certModalBody').querySelector('.cert-no-link');
+    if (noLink) noLink.style.display = 'none';
+
+    // Set Drive preview & open URLs
+    const previewUrl = `https://drive.google.com/file/d/${cert.driveId}/preview`;
+    const openUrl    = `https://drive.google.com/file/d/${cert.driveId}/view`;
+    certOpenBtn.href = openUrl;
+
+    // Show loading, load iframe
+    certLoading.style.display = 'flex';
+    certIframe.style.display  = 'none';
+    certIframe.src = '';
+    certIframe.onload = () => {
+      certLoading.style.display = 'none';
+      certIframe.style.display  = 'block';
+    };
+    certIframe.src = previewUrl;
+  }
+
+  function closeCertModal() {
+    certModal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      certIframe.src = '';
+      certIframe.style.display  = 'none';
+      certLoading.style.display = 'flex';
+    }, 300);
+  }
+
+  // Click on cert cards (event delegation)
+  certGrid.addEventListener('click', e => {
+    const card = e.target.closest('[data-cert-index]');
+    if (card) openCertModal(parseInt(card.dataset.certIndex));
+  });
+
+  // Keyboard accessibility
+  certGrid.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const card = e.target.closest('[data-cert-index]');
+      if (card) { e.preventDefault(); openCertModal(parseInt(card.dataset.certIndex)); }
+    }
+  });
+
+  // Close modal
+  certModalClose.addEventListener('click', closeCertModal);
+  certModal.addEventListener('click', e => { if (e.target === certModal) closeCertModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCertModal(); });
+
+  // ── Scroll reveal ──
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold:.1, rootMargin:'0px 0px -80px 0px' });
   document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => obs.observe(el));
 
-  // Nav scroll
+  // ── Nav scroll ──
   const nav = document.querySelector('.nav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
 
-  // Mobile nav
+  // ── Mobile nav ──
   const tog = document.getElementById('navToggle');
   const mob = document.getElementById('navMob');
   tog.addEventListener('click', () => mob.classList.toggle('open'));
   document.querySelectorAll('.nav-mob a').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
 
-  // Exp tabs
+  // ── Exp tabs ──
   document.querySelectorAll('.etab').forEach(t => {
     t.addEventListener('click', () => {
       document.querySelectorAll('.etab').forEach(x => x.classList.remove('active'));
@@ -1181,36 +1409,65 @@
     });
   });
 
-  // Modal close on overlay click
+  // ── Contact modal close on overlay ──
   document.getElementById('contactModal').addEventListener('click', e => {
     if(e.target === document.getElementById('contactModal')) document.getElementById('contactModal').classList.remove('open');
   });
 
-  // Form
+  // ── Contact form — EmailJS send ──
   function doSubmit(e) {
-    if(e) e.preventDefault();
-    const n = document.getElementById('fName').value.trim();
-    const em = document.getElementById('fEmail').value.trim();
-    const s = document.getElementById('fSubj').value.trim();
-    const m = document.getElementById('fMsg').value.trim();
+    if (e) e.preventDefault();
+    const n   = document.getElementById('fName').value.trim();
+    const em  = document.getElementById('fEmail').value.trim();
+    const s   = document.getElementById('fSubj').value.trim();
+    const m   = document.getElementById('fMsg').value.trim();
     const err = document.getElementById('fErr');
-    if(!n||!em||!s||!m){ document.getElementById('fErrTxt').textContent='Please fill all fields'; err.classList.add('show'); return; }
+
+    // Basic validation
+    if (!n || !em || !s || !m) {
+      document.getElementById('fErrTxt').textContent = 'Please fill all fields';
+      err.classList.add('show');
+      return;
+    }
     err.classList.remove('show');
+
     const btn = document.getElementById('sendBtn');
-    btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';
-    setTimeout(() => {
-      document.getElementById('cForm').style.display='none';
-      document.getElementById('fOk').style.display='block';
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+    // Send via EmailJS — template variables must match your EmailJS template
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_name:  n,     // {{name}} in template
+      from_email: em,    // {{from_email}} in template
+      subject:    s,     // {{subject}} in template  (update template Subject field to {{subject}})
+      message:    m,     // {{message}} in template
+      email:      em,    // {{email}} used in Reply-To
+      name:       n      // {{name}} used in body
+    })
+    .then(() => {
+      // Success
+      document.getElementById('cForm').style.display = 'none';
+      document.getElementById('fOk').style.display   = 'block';
       setTimeout(() => {
-        document.getElementById('cForm').reset(); document.getElementById('cForm').style.display='block';
-        document.getElementById('fOk').style.display='none';
-        btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> Send';
+        document.getElementById('cForm').reset();
+        document.getElementById('cForm').style.display = 'block';
+        document.getElementById('fOk').style.display   = 'none';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
         document.getElementById('contactModal').classList.remove('open');
       }, 3000);
-    }, 1000);
+    })
+    .catch((error) => {
+      // Error
+      console.error('EmailJS error:', error);
+      document.getElementById('fErrTxt').textContent = 'Failed to send. Please try again or email directly.';
+      err.classList.add('show');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
+    });
   }
 
-  // Smooth scroll
+  // ── Smooth scroll ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const h = a.getAttribute('href');
