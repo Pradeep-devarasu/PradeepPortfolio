@@ -142,7 +142,6 @@
     }
     @keyframes gshift { 0%,100%{transform:translate(0,0)} 50%{transform:translate(15px,15px)} }
 
-    /* Grid lines background */
     #hero::after {
       content:''; position:absolute; inset:0; pointer-events:none;
       background-image: linear-gradient(var(--border) 1px, transparent 1px),
@@ -204,7 +203,7 @@
       border:1.5px solid var(--border2); text-transform:uppercase;
       letter-spacing:.8px; transition:all .35s var(--ease); cursor:pointer; font-family:var(--font-body);
     }
-    .btn-out:hover { border-color:var(--accent); color:var(--accent); background:var(--glow2); color:var(--accent); }
+    .btn-out:hover { border-color:var(--accent); color:var(--accent); background:var(--glow2); }
 
     .hero-stats {
       display:flex; gap:2.5rem; flex-wrap:wrap; padding-top:2rem;
@@ -577,7 +576,6 @@
     @media(min-width:768px){ .col-md-6{width:50%} .col-md-4{width:33.333%} .col-md-3{width:25%} }
     @media(min-width:992px){ .col-lg-4{width:33.333%} .col-lg-3{width:25%} }
 
-    /* Sub heading */
     .sub-head { font-family:var(--font-head); font-size:1.2rem; font-weight:700; color:var(--white); margin:2.5rem 0 1.25rem; }
   </style>
 </head>
@@ -613,7 +611,7 @@
         <div class="hero-badge"><span class="pulse-dot"></span>Available for opportunities</div>
         <h1 class="hero-name">Pradeep<br>Devarasu</h1>
         <p class="hero-role">// Junior Software Developer</p>
-        <p class="hero-desc">Results-driven developer with nearly 3 years of hands-on experience in full-stack application development. Skilled in C#, ASP.NET Core Web API, ReactJS, PostgreSQL, and Micro Frontend Architecture.</p>
+        <p class="hero-desc">Results-driven Junior Software Developer with nearly 3 years of hands-on experience in full-stack application development, including internship and industry experience. Skilled in C#, ASP.NET Core Web API, ReactJS, AngularJS, PostgreSQL, and Micro Frontend Architecture.</p>
         <div class="hero-btns">
           <button class="btn-prim" onclick="document.getElementById('contactModal').classList.add('open')">
             <i class="fas fa-envelope"></i> Get in Touch
@@ -642,7 +640,7 @@
         <div class="hcard-top">
           <div class="avatar">PD</div>
           <div class="av-name">Pradeep Devarasu</div>
-          <div class="av-sub">Full-Stack Developer</div>
+          <div class="av-sub">Junior Software Developer</div>
         </div>
         <div class="hcard-body">
           <div class="irow"><i class="fas fa-map-marker-alt"></i><span>133, Main Road, Siruvalur, Gobichettipalayam – 638054</span></div>
@@ -661,7 +659,7 @@
     <div class="line rv"></div>
     <div class="sec-tag rv">About</div>
     <h2 class="sec-title rv">About Me</h2>
-    <p class="sec-sub rv-l">Full-stack developer experienced in ERP solutions, API integration, responsive UI development, and enterprise application enhancements across Healthcare, Store Management, and Sales ERP domains.</p>
+    <p class="sec-sub rv-l">Results-driven Junior Software Developer experienced in ERP solutions, API integration, responsive UI development, and enterprise application enhancements across Healthcare, Store Management, Sales ERP, and business applications. Strong problem-solving abilities with experience in Agile methodologies, team collaboration, and delivering scalable software solutions.</p>
 
     <div class="row">
       <div class="col-md-6 col-lg-4">
@@ -722,45 +720,62 @@
     <p class="sec-sub rv-l">A comprehensive set of technical skills built through real-world projects and continuous learning.</p>
 
     <div class="row">
+      <!-- Programming Languages -->
       <div class="col-md-6 col-lg-4">
         <div class="skcard rv">
-          <div class="skcard-head"><i class="fas fa-laptop-code"></i><span>Frontend</span></div>
-          <div class="tags">
-            <span class="tag">ReactJS</span>
-            <span class="tag">AngularJS</span>
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">Bootstrap</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">TypeScript</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="skcard rv d2">
-          <div class="skcard-head"><i class="fas fa-server"></i><span>Backend</span></div>
+          <div class="skcard-head"><i class="fas fa-terminal"></i><span>Programming Languages</span></div>
           <div class="tags">
             <span class="tag">C#</span>
-            <span class="tag">ASP.NET Core Web API</span>
-            <span class="tag">ASP.NET Core MVC</span>
-            <span class="tag">.NET Core 8</span>
-            <span class="tag">Django</span>
+            <span class="tag">JavaScript</span>
             <span class="tag">Python</span>
           </div>
         </div>
       </div>
+      <!-- Frontend -->
+      <div class="col-md-6 col-lg-4">
+        <div class="skcard rv d2">
+          <div class="skcard-head"><i class="fas fa-laptop-code"></i><span>Frontend</span></div>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Bootstrap</span>
+            <span class="tag">AngularJS</span>
+            <span class="tag">ReactJS</span>
+          </div>
+        </div>
+      </div>
+      <!-- Backend -->
       <div class="col-md-6 col-lg-4">
         <div class="skcard rv d3">
-          <div class="skcard-head"><i class="fas fa-tools"></i><span>Tools & Database</span></div>
+          <div class="skcard-head"><i class="fas fa-server"></i><span>Backend</span></div>
+          <div class="tags">
+            <span class="tag">ASP.NET Core Web API</span>
+            <span class="tag">ASP.NET Core MVC</span>
+            <span class="tag">Django</span>
+          </div>
+        </div>
+      </div>
+      <!-- Database -->
+      <div class="col-md-6 col-lg-4">
+        <div class="skcard rv d2">
+          <div class="skcard-head"><i class="fas fa-database"></i><span>Database</span></div>
           <div class="tags">
             <span class="tag">PostgreSQL</span>
-            <span class="tag">PgAdmin</span>
-            <span class="tag">Git</span>
-            <span class="tag">GitHub</span>
-            <span class="tag">Postman</span>
-            <span class="tag">Jira</span>
+          </div>
+        </div>
+      </div>
+      <!-- Tools -->
+      <div class="col-md-6 col-lg-4">
+        <div class="skcard rv d3">
+          <div class="skcard-head"><i class="fas fa-tools"></i><span>Tools</span></div>
+          <div class="tags">
             <span class="tag">Visual Studio</span>
             <span class="tag">VS Code</span>
+            <span class="tag">Git</span>
+            <span class="tag">GitHub</span>
+            <span class="tag">PgAdmin</span>
+            <span class="tag">Jira</span>
+            <span class="tag">Postman</span>
           </div>
         </div>
       </div>
@@ -781,6 +796,7 @@
       <button class="etab" data-tab="exp2">Internship</button>
     </div>
 
+    <!-- Junior Developer -->
     <div class="epanel active" id="exp1">
       <div class="xcard rv">
         <div class="xbadge"><span class="pulse-dot" style="width:6px;height:6px;"></span> Current Role</div>
@@ -799,7 +815,7 @@
         </div>
 
         <div class="xresp">
-          <div class="xresp-ttl">Key Responsibilities</div>
+          <div class="xresp-ttl">Key Responsibilities &amp; Contributions</div>
           <ul class="rlist">
             <li><i class="fas fa-chevron-right"></i><span>Developing scalable and responsive UI screens using ReactJS and Micro Frontend Architecture (MFE)</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Working with ASP.NET Core Web API and .NET Core 8 microservices</span></li>
@@ -807,7 +823,10 @@
             <li><i class="fas fa-chevron-right"></i><span>Integrating REST APIs and managing frontend-backend data flow</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Developing reusable components, dynamic forms, validations, pagination, search filters, and export functionality</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Supporting implementation activities for ERP modules</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Participating in debugging, issue resolution, and production support</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Working on Excel Add-in integrations and business workflow enhancements</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Contributing to UI enhancements and modifications for the GoZoBee Website</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Supporting implementation activities in the Sales ERP Project</span></li>
           </ul>
         </div>
 
@@ -823,15 +842,16 @@
       </div>
     </div>
 
+    <!-- Internship -->
     <div class="epanel" id="exp2">
       <div class="xcard rv">
         <div class="xbadge old">Internship</div>
         <div class="x-co">GoZoBee Private Limited</div>
         <div class="x-role">Full Stack Developer Intern &nbsp;·&nbsp; 1 May 2023 – 31 May 2025</div>
-        <div class="x-desc">Underwent intensive full-stack development training and gained hands-on experience by working on a live Healthcare and Life Science Management project. Built a strong foundation in modern web development technologies and real-time software development practices.</div>
+        <div class="x-desc">Underwent intensive full-stack development training and gained hands-on experience by working on a live Healthcare and Life Science Management project. This period helped build a strong foundation in modern web development technologies and real-time software development practices.</div>
 
         <div class="xresp">
-          <div class="xresp-ttl">Learning & Training Areas</div>
+          <div class="xresp-ttl">Learning &amp; Training Areas</div>
           <ul class="rlist">
             <li><i class="fas fa-chevron-right"></i><span>C#, ASP.NET Core MVC, ASP.NET Core Web API</span></li>
             <li><i class="fas fa-chevron-right"></i><span>PostgreSQL database design and query optimization</span></li>
@@ -844,12 +864,13 @@
         </div>
 
         <div class="xresp">
-          <div class="xresp-ttl">Key Contributions</div>
+          <div class="xresp-ttl">Key Responsibilities &amp; Contributions</div>
           <ul class="rlist">
             <li><i class="fas fa-chevron-right"></i><span>Developed and implemented web applications using C#, ASP.NET Core Web API, and AngularJS</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Designed and built responsive UI components using HTML, CSS, Bootstrap, and TypeScript</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Developed OAuth-based authentication systems to improve application security</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Integrated backend APIs and optimized database performance using PostgreSQL</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Participated in daily stand-up meetings and project discussions</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Worked on dashboards and healthcare workflow modules</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Conducted training sessions for junior interns on technical and functional concepts</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Collaborated with team members on live project implementation and debugging activities</span></li>
@@ -879,6 +900,7 @@
     <p class="sec-sub rv-l">Real-world enterprise projects delivered at GoZoBee Private Limited.</p>
 
     <div class="row">
+      <!-- Project 01 -->
       <div class="col-md-6 col-lg-4">
         <div class="pcard rv">
           <div class="pcard-head">
@@ -898,6 +920,7 @@
         </div>
       </div>
 
+      <!-- Project 02 -->
       <div class="col-md-6 col-lg-4">
         <div class="pcard rv d2">
           <div class="pcard-head">
@@ -906,7 +929,7 @@
             <div class="p-title">Sales ERP Project</div>
           </div>
           <div class="pcard-body">
-            <p class="p-desc">Enterprise Sales ERP system with reusable components, backend API integration, production support, debugging and issue resolution for business workflow automation.</p>
+            <p class="p-desc">Enterprise Sales ERP system with reusable components, backend API integration, production support, debugging, issue resolution, and business workflow automation.</p>
             <div class="ptechs">
               <span class="ptech">ReactJS</span>
               <span class="ptech">.NET Core 8</span>
@@ -917,6 +940,7 @@
         </div>
       </div>
 
+      <!-- Project 03 -->
       <div class="col-md-6 col-lg-4">
         <div class="pcard rv d3">
           <div class="pcard-head">
@@ -925,7 +949,7 @@
             <div class="p-title">Excel Add-in Project</div>
           </div>
           <div class="pcard-body">
-            <p class="p-desc">Business workflow enhancement tool as an Excel Add-in for seamless integration with enterprise data management and business process automation.</p>
+            <p class="p-desc">Business workflow enhancement tool built as an Excel Add-in for seamless integration with enterprise data management and business process automation.</p>
             <div class="ptechs">
               <span class="ptech">JavaScript</span>
               <span class="ptech">Excel Add-in</span>
@@ -935,12 +959,13 @@
         </div>
       </div>
 
+      <!-- Project 04 -->
       <div class="col-md-6 col-lg-4">
         <div class="pcard rv d2">
           <div class="pcard-head">
             <div class="p-num">Project 04</div>
             <div class="p-ico"><i class="fas fa-heartbeat"></i></div>
-            <div class="p-title">Healthcare & Life Science Management</div>
+            <div class="p-title">Healthcare &amp; Life Science Management</div>
           </div>
           <div class="pcard-body">
             <p class="p-desc">Live healthcare management system with dashboards, workflow modules, OAuth-based authentication, and PostgreSQL-optimized database performance.</p>
@@ -949,6 +974,25 @@
               <span class="ptech">AngularJS</span>
               <span class="ptech">PostgreSQL</span>
               <span class="ptech">OAuth</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 05 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="pcard rv d3">
+          <div class="pcard-head">
+            <div class="p-num">Project 05</div>
+            <div class="p-ico"><i class="fas fa-globe"></i></div>
+            <div class="p-title">GoZoBee Website UI Modification</div>
+          </div>
+          <div class="pcard-body">
+            <p class="p-desc">UI enhancements and modifications for the GoZoBee company website, improving visual design, responsiveness, and overall user experience.</p>
+            <div class="ptechs">
+              <span class="ptech">HTML</span>
+              <span class="ptech">CSS</span>
+              <span class="ptech">JavaScript</span>
             </div>
           </div>
         </div>
@@ -962,7 +1006,7 @@
   <div class="wrap">
     <div class="line rv"></div>
     <div class="sec-tag rv">Credentials</div>
-    <h2 class="sec-title rv">Certifications & Tools</h2>
+    <h2 class="sec-title rv">Certifications &amp; Tools</h2>
     <p class="sec-sub rv-l">Professional certifications and tools that validate my technical expertise.</p>
 
     <div class="sub-head rv">Certifications</div>
@@ -980,7 +1024,7 @@
         <div class="certcard rv d2">
           <div class="certcard-ico"><i class="fab fa-html5"></i></div>
           <div>
-            <div class="cert-name">HTML & CSS</div>
+            <div class="cert-name">HTML &amp; CSS</div>
             <div class="cert-src">Professional Certificate</div>
           </div>
         </div>
@@ -1005,7 +1049,7 @@
       </div>
     </div>
 
-    <div class="sub-head rv">Tools & Technologies</div>
+    <div class="sub-head rv">Tools &amp; Technologies</div>
     <div class="row">
       <div class="col-6 col-sm-4 col-md-4 col-lg-3"><div class="toolcard rv"><i class="fab fa-react"></i><span>ReactJS</span></div></div>
       <div class="col-6 col-sm-4 col-md-4 col-lg-3"><div class="toolcard rv d1"><i class="fab fa-microsoft"></i><span>ASP.NET</span></div></div>
@@ -1059,7 +1103,7 @@
           <div class="citem-ico"><i class="fas fa-map-marker-alt"></i></div>
           <div>
             <div class="citem-lbl">Location</div>
-            <div class="citem-val">Gobichettipalayam, Tamil Nadu, India</div>
+            <div class="citem-val">133, Main Road, Siruvalur, Gobichettipalayam – 638054, Tamil Nadu, India</div>
           </div>
         </div>
       </div>
