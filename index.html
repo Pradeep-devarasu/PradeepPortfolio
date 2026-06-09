@@ -690,9 +690,9 @@
           <button class="btn-prim" onclick="document.getElementById('contactModal').classList.add('open')">
             <i class="fas fa-envelope"></i> Get in Touch
           </button>
-          <a href="mailto:pradeep.devarasu24@gmail.com" class="btn-out">
+          <button class="btn-out" onclick="document.getElementById('contactModal').classList.add('open')">
             <i class="fas fa-paper-plane"></i> Email Me
-          </a>
+          </button>
         </div>
         <div class="hero-stats">
           <div class="rv">
@@ -1226,20 +1226,19 @@
   //  EMAILJS CONFIGURATION — replace with your 3 IDs
   //  Get these from https://dashboard.emailjs.com
   // ═══════════════════════════════════════════════════════
-  const EMAILJS_PUBLIC_KEY  = '2Hr2NzDWHcTj_oI1H';       // Line 1224 — Account → General → Public Key
-  const EMAILJS_SERVICE_ID  = 'service_vkl3m1m';       // Line 1225 — Email Services → your service
-  const EMAILJS_TEMPLATE_ID = 'template_2bmjx2b';      // Line 1226 — Email Templates → Settings tab
+  const EMAILJS_PUBLIC_KEY  = '2Hr2NzDWHcTj_oI1H';
+  const EMAILJS_SERVICE_ID  = 'service_vkl3m1m';
+  const EMAILJS_TEMPLATE_ID = 'template_2bmjx2b';
 
   // Initialise EmailJS with your public key
   emailjs.init(EMAILJS_PUBLIC_KEY);
 
   // ═══════════════════════════════════════════════════════
-  //  CERTIFICATE DATA — update driveId with your file IDs
-  //  How to get a File ID:
-  //    1. Upload certificate to Google Drive
-  //    2. Right-click → Share → "Anyone with the link" → Viewer
-  //    3. Copy share URL: https://drive.google.com/file/d/FILE_ID_HERE/view
-  //    4. Paste just the FILE_ID_HERE part below
+  //  CERTIFICATE DATA
+  //  Paste the full Google Drive share link OR just the File ID
+  //  Both formats are supported:
+  //    Full URL: 'https://drive.google.com/file/d/1aBcXyz.../view?usp=sharing'
+  //    File ID only: '1aBcXyz...'
   //  To add a new certificate: add a new object to this array
   // ═══════════════════════════════════════════════════════
   const CERTIFICATES = [
@@ -1247,28 +1246,27 @@
       name:    'Python Programming',
       issuer:  'Professional Certificate',
       icon:    'fab fa-python',
-      driveId: '1mbhYzCfWyKPbo_mhtU1vgZueejH7uDTI/view?usp=sharing'   // ← replace this
+      driveId: 'https://drive.google.com/file/d/1mbhYzCfWyKPbo_mhtU1vgZueejH7uDTI/view?usp=sharing'
     },
     {
       name:    'HTML & CSS',
       issuer:  'Professional Certificate',
       icon:    'fab fa-html5',
-      driveId: '1xcKPG4nchEGdgEvEd2WbMXQ_i4gn85k_/view?usp=sharing'  // ← replace this
+      driveId: 'https://drive.google.com/file/d/1xcKPG4nchEGdgEvEd2WbMXQ_i4gn85k_/view?usp=sharing'
     },
     {
       name:    'PostgreSQL',
       issuer:  'Professional Certificate',
       icon:    'fas fa-database',
-      driveId: '1zQe-SvjFkKXNpdnf6Mt_RtD-keCxoLeH/view?usp=drive_link' // ← replace this
+      driveId: 'https://drive.google.com/file/d/1zQe-SvjFkKXNpdnf6Mt_RtD-keCxoLeH/view?usp=drive_link'
     },
     {
       name:    'Django Framework',
       issuer:  'Professional Certificate',
       icon:    'fas fa-code',
-      driveId: '1HfPo7SsKGqTkdUr4dAGrYu6I1VqwSIR6/view?usp=drive_link'    // ← replace this
+      driveId: 'https://drive.google.com/file/d/1HfPo7SsKGqTkdUr4dAGrYu6I1VqwSIR6/view?usp=drive_link'
     }
-    // Add more certificates here:
-    // { name: 'New Cert', issuer: 'Issuer Name', icon: 'fas fa-star', driveId: 'FILE_ID' },
+    // Add more: { name: 'New Cert', issuer: 'Issuer', icon: 'fas fa-star', driveId: 'FULL_URL_OR_FILE_ID' },
   ];
 
   // ── Build certificate cards from array ──
@@ -1299,6 +1297,13 @@
   const certOpenBtn    = document.getElementById('certOpenBtn');
   const certModalClose = document.getElementById('certModalClose');
 
+  function extractDriveId(value) {
+    if (!value) return '';
+    // If it's a full URL, extract the ID between /d/ and the next /
+    const match = value.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    return match ? match[1] : value; // fallback: treat value as raw ID
+  }
+
   function openCertModal(index) {
     const cert = CERTIFICATES[index];
     if (!cert) return;
@@ -1312,13 +1317,15 @@
     certModal.classList.add('open');
     document.body.style.overflow = 'hidden';
 
+    // Extract clean File ID from full URL or raw ID
+    const fileId = extractDriveId(cert.driveId);
+
     // Check if Drive ID is set
-    if (!cert.driveId || cert.driveId.startsWith('YOUR_')) {
+    if (!fileId || fileId.startsWith('YOUR_')) {
       certLoading.style.display  = 'none';
       certIframe.style.display   = 'none';
       certOpenBtn.href = '#';
       const body = document.getElementById('certModalBody');
-      // Show placeholder message
       let noLink = body.querySelector('.cert-no-link');
       if (!noLink) {
         noLink = document.createElement('div');
@@ -1338,9 +1345,9 @@
     const noLink = document.getElementById('certModalBody').querySelector('.cert-no-link');
     if (noLink) noLink.style.display = 'none';
 
-    // Set Drive preview & open URLs
-    const previewUrl = `https://drive.google.com/file/d/${cert.driveId}/preview`;
-    const openUrl    = `https://drive.google.com/file/d/${cert.driveId}/view`;
+    // Build clean preview & open URLs using extracted File ID
+    const previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+    const openUrl    = `https://drive.google.com/file/d/${fileId}/view`;
     certOpenBtn.href = openUrl;
 
     // Show loading, load iframe
