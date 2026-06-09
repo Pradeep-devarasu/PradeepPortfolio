@@ -525,11 +525,13 @@
       content:''; position:absolute; inset:0;
       background:radial-gradient(ellipse at center, var(--glow) 0%, transparent 65%);
       opacity:0; transition:opacity .4s;
+      pointer-events:none;
     }
     .cta:hover::before { opacity:1; }
     .cta:hover { border-color:rgba(124,106,247,.4); }
     .cta h3 { font-family:var(--font-head); font-size:clamp(1.3rem,3vw,2rem); font-weight:800; margin-bottom:.7rem; position:relative; z-index:1; }
     .cta p { color:var(--w50); margin-bottom:1.8rem; font-size:.9rem; position:relative; z-index:1; }
+    .cta .btn-prim { position:relative; z-index:1; }
 
     .citem {
       background:var(--bg3); border:1px solid var(--border); border-radius:var(--r);
