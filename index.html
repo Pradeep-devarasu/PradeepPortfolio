@@ -87,7 +87,7 @@
     .nav-logo:hover { color: var(--accent); }
     .nav-links { display:flex; gap:.25rem; list-style:none; }
     .nav-links a {
-      font-size: .78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px;
+      font-size: .78rem; font-weight: 500; letter-spacing: .5px;
       color: var(--w50); padding: 7px 15px; border-radius: var(--r);
       transition: all .3s ease;
     }
@@ -105,8 +105,8 @@
     .nav-mob.open { display:flex; }
     .nav-mob a {
       font-size:.85rem; color:var(--w50); padding:10px 6px;
-      border-bottom:1px solid var(--border); text-transform:uppercase;
-      letter-spacing:1px; font-weight:500; transition:all .3s;
+      border-bottom:1px solid var(--border);
+      letter-spacing:.3px; font-weight:500; transition:all .3s;
     }
     .nav-mob a:last-child { border:none; }
     .nav-mob a:hover { color:var(--accent); padding-left:14px; }
@@ -192,8 +192,8 @@
     .btn-prim {
       display:inline-flex; align-items:center; gap:8px;
       background:var(--accent); color:var(--white); font-weight:700;
-      font-size:.82rem; padding:13px 28px; border-radius:var(--r);
-      text-transform:uppercase; letter-spacing:.8px; transition:all .35s var(--ease);
+      font-size:.88rem; padding:13px 28px; border-radius:var(--r);
+      letter-spacing:.3px; transition:all .35s var(--ease);
       border:none; cursor:pointer; font-family:var(--font-body);
     }
     .btn-prim:hover { background:var(--accent2); transform:translateY(-3px); box-shadow:0 12px 32px var(--glow); color:var(--white); }
@@ -201,9 +201,9 @@
     .btn-out {
       display:inline-flex; align-items:center; gap:8px;
       background:transparent; color:var(--w80); font-weight:600;
-      font-size:.82rem; padding:12px 28px; border-radius:var(--r);
-      border:1.5px solid var(--border2); text-transform:uppercase;
-      letter-spacing:.8px; transition:all .35s var(--ease); cursor:pointer; font-family:var(--font-body);
+      font-size:.88rem; padding:12px 28px; border-radius:var(--r);
+      border:1.5px solid var(--border2);
+      letter-spacing:.3px; transition:all .35s var(--ease); cursor:pointer; font-family:var(--font-body);
     }
     .btn-out:hover { border-color:var(--accent); color:var(--accent); background:var(--glow2); }
 
@@ -317,11 +317,11 @@
 
     .etabs { display:flex; gap:.6rem; margin-bottom:2.5rem; flex-wrap:wrap; }
     .etab {
-      font-size:.76rem; font-weight:600; padding:9px 20px;
+      font-size:.82rem; font-weight:600; padding:9px 20px;
       border-radius:var(--r); border:1.5px solid var(--border2);
       background:transparent; color:var(--w50); cursor:pointer;
-      transition:all .35s var(--ease); font-family:var(--font-mono);
-      text-transform:uppercase; letter-spacing:.8px;
+      transition:all .35s var(--ease); font-family:var(--font-body);
+      letter-spacing:.3px;
     }
     .etab.active { background:var(--accent); color:var(--white); border-color:var(--accent); box-shadow:0 0 20px var(--glow); }
     .etab:not(.active):hover { border-color:var(--accent); color:var(--accent2); }
@@ -594,16 +594,16 @@
     }
     .mbtn-cancel {
       background:none; border:1px solid var(--border2); color:var(--w50);
-      cursor:pointer; font-size:.8rem; font-weight:500; padding:9px 20px;
+      cursor:pointer; font-size:.85rem; font-weight:500; padding:9px 20px;
       border-radius:var(--r); transition:all .3s; font-family:var(--font-body);
-      text-transform:uppercase; letter-spacing:.5px;
+      letter-spacing:.3px;
     }
     .mbtn-cancel:hover { border-color:var(--accent); color:var(--accent2); }
     .mbtn-send {
       background:var(--accent); color:var(--white); border:none;
-      cursor:pointer; font-size:.8rem; font-weight:700; padding:9px 22px;
+      cursor:pointer; font-size:.85rem; font-weight:700; padding:9px 22px;
       border-radius:var(--r); transition:all .4s var(--ease); font-family:var(--font-body);
-      display:flex; align-items:center; gap:7px; text-transform:uppercase; letter-spacing:.5px;
+      display:flex; align-items:center; gap:7px; letter-spacing:.3px;
     }
     .mbtn-send:hover { background:var(--accent2); transform:translateY(-2px); box-shadow:0 8px 24px var(--glow); }
     .mbtn-send:disabled { opacity:.6; cursor:not-allowed; transform:none; }
@@ -688,7 +688,7 @@
         <p class="hero-desc">Results-driven Junior Software Developer with nearly 3 years of hands-on experience in full-stack application development, including internship and industry experience. Skilled in C#, ASP.NET Core Web API, ReactJS, AngularJS, PostgreSQL, and Micro Frontend Architecture.</p>
         <div class="hero-btns">
           <button class="btn-prim" onclick="document.getElementById('contactModal').classList.add('open')">
-            <i class="fas fa-envelope"></i> Get in Touch
+            <i class="fas fa-envelope"></i> Get In Touch
           </button>
           <button class="btn-out" onclick="document.getElementById('contactModal').classList.add('open')">
             <i class="fas fa-paper-plane"></i> Email Me
@@ -1173,7 +1173,7 @@
     </div>
     <div class="mfoot">
       <button class="mbtn-cancel" onclick="document.getElementById('contactModal').classList.remove('open')">Cancel</button>
-      <button class="mbtn-send" id="sendBtn" onclick="doSubmit()"><i class="fas fa-paper-plane"></i> Send</button>
+      <button class="mbtn-send" id="sendBtn" onclick="doSubmit()"><i class="fas fa-paper-plane"></i> Send Message</button>
     </div>
   </div>
 </div>
@@ -1442,14 +1442,14 @@
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-    // Send via EmailJS — template variables must match your EmailJS template
+    // Send via EmailJS — variables match your template exactly
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      from_name:  n,     // {{name}} in template
-      from_email: em,    // {{from_email}} in template
-      subject:    s,     // {{subject}} in template  (update template Subject field to {{subject}})
-      message:    m,     // {{message}} in template
-      email:      em,    // {{email}} used in Reply-To
-      name:       n      // {{name}} used in body
+      name:       n,    // {{name}} — sender's name shown in email body
+      email:      em,   // {{email}} — used in Reply-To field
+      from_email: em,   // {{from_email}} — From Email field
+      subject:    s,    // {{subject}} — Subject field (update template Subject to {{subject}})
+      message:    m,    // {{message}} — message body
+      time:       new Date().toLocaleString()  // {{time}} — timestamp shown in template
     })
     .then(() => {
       // Success
@@ -1460,7 +1460,7 @@
         document.getElementById('cForm').style.display = 'block';
         document.getElementById('fOk').style.display   = 'none';
         btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
         document.getElementById('contactModal').classList.remove('open');
       }, 3000);
     })
