@@ -1228,7 +1228,7 @@
   // ═══════════════════════════════════════════════════════
   const EMAILJS_PUBLIC_KEY  = '2Hr2NzDWHcTj_oI1H';
   const EMAILJS_SERVICE_ID  = 'service_wgmev54';
-  const EMAILJS_TEMPLATE_ID = 'template_l8ogyom';
+  const EMAILJS_TEMPLATE_ID = 'template_ykn42hs';
 
   // Initialise EmailJS with your public key
   emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -1449,11 +1449,12 @@
     // Reply To: {{email}}
     // Body: {{message}}
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      subject:    s,   // → Contact Us: {{subject}}
-      name:       n,   // → From Name & body greeting
-      from_email: em,  // → From Email field
-      email:      em,  // → Reply To field
-      message:    m    // → message body
+      subject:    s,
+      name:       n,
+      from_email: em,
+      email:      em,
+      message:    m,
+      time:       new Date().toLocaleString()
     })
     .then(() => {
       // Success
