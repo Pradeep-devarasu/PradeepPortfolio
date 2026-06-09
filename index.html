@@ -1442,14 +1442,18 @@
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-    // Send via EmailJS — variables match your template exactly
+    // Send via EmailJS — matches your template exactly:
+    // Subject: Contact Us: {{subject}}
+    // From Name: {{name}}
+    // From Email: {{from_email}}
+    // Reply To: {{email}}
+    // Body: {{message}}
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      name:       n,    // {{name}} — sender's name shown in email body
-      email:      em,   // {{email}} — used in Reply-To field
-      from_email: em,   // {{from_email}} — From Email field
-      subject:    s,    // {{subject}} — Subject field (update template Subject to {{subject}})
-      message:    m,    // {{message}} — message body
-      time:       new Date().toLocaleString()  // {{time}} — timestamp shown in template
+      subject:    s,   // → Contact Us: {{subject}}
+      name:       n,   // → From Name & body greeting
+      from_email: em,  // → From Email field
+      email:      em,  // → Reply To field
+      message:    m    // → message body
     })
     .then(() => {
       // Success
@@ -1465,12 +1469,12 @@
       }, 3000);
     })
     .catch((error) => {
-      // Error
       console.error('EmailJS error:', error);
-      document.getElementById('fErrTxt').textContent = 'Failed to send. Please try again or email directly.';
+      const errMsg = error?.text || error?.message || JSON.stringify(error) || 'Unknown error';
+      document.getElementById('fErrTxt').textContent = 'Error: ' + errMsg;
       err.classList.add('show');
       btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
     });
   }
 
