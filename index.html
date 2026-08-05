@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pradeep Devarasu — Junior Software Developer</title>
+  <title>Pradeep Devarasu — Senior Software Developer</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,6 +28,7 @@
       --teal:       #2dd4bf;
       --glow:       rgba(124,106,247,0.18);
       --glow2:      rgba(124,106,247,0.08);
+      --tealglow:   rgba(45,212,191,0.10);
       --font-head:  'Syne', sans-serif;
       --font-body:  'DM Sans', sans-serif;
       --font-mono:  'DM Mono', monospace;
@@ -60,6 +61,11 @@
     .rv-r.visible { opacity:1; transform:translateX(0); }
     .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
     .d4{transition-delay:.4s} .d5{transition-delay:.5s} .d6{transition-delay:.6s}
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation:none !important; transition:none !important; }
+      .rv, .rv-l, .rv-r { opacity:1 !important; transform:none !important; }
+    }
 
     /* ── NAV ── */
     .nav {
@@ -117,7 +123,7 @@
 
     .sec-tag {
       font-family: var(--font-mono); font-size:.7rem; color:var(--accent);
-      letter-spacing:3px;  margin-bottom:.75rem; display:inline-block;
+      letter-spacing:3px; margin-bottom:.75rem; display:inline-block;
     }
     .sec-title {
       font-family: var(--font-head); font-size: clamp(1.9rem,4vw,2.7rem);
@@ -158,7 +164,7 @@
     .hero-badge {
       display:inline-flex; align-items:center; gap:8px;
       font-family:var(--font-mono); font-size:.72rem; color:var(--w50);
-      letter-spacing:2px;  margin-bottom:1.8rem;
+      letter-spacing:2px; margin-bottom:1.8rem;
       animation: fadeUp .7s ease .2s both;
     }
     .pulse-dot {
@@ -210,7 +216,7 @@
       border-top:1px solid var(--border); animation:fadeUp .7s ease .8s both;
     }
     .stat-num { font-family:var(--font-head); font-size:2rem; font-weight:800; color:var(--accent2); line-height:1; }
-    .stat-lbl { font-family:var(--font-mono); font-size:.65rem; color:var(--w50); letter-spacing:1.5px;  margin-top:5px; }
+    .stat-lbl { font-family:var(--font-mono); font-size:.65rem; color:var(--w50); letter-spacing:1.5px; margin-top:5px; }
 
     /* Hero Card */
     .hcard {
@@ -298,7 +304,7 @@
     .skcard-head {
       display:flex; align-items:center; gap:8px; margin-bottom:1.25rem;
       font-family:var(--font-mono); font-size:.68rem; color:var(--w50);
-      letter-spacing:2px; 
+      letter-spacing:2px;
     }
     .skcard-head i { color:var(--accent2); font-size:.95rem; transition:all .4s; }
     .skcard:hover .skcard-head i { transform:rotate(15deg) scale(1.1); }
@@ -312,6 +318,40 @@
 
     /* ── EXPERIENCE ── */
     #experience { background:var(--bg2); }
+
+    /* Career timeline rail */
+    .timeline {
+      display:flex; flex-direction:column; gap:0;
+      margin-bottom:2.75rem; position:relative;
+      padding-left:6px;
+    }
+    .tl-item {
+      display:flex; align-items:center; gap:1rem;
+      position:relative; padding:14px 0 14px 26px;
+    }
+    .tl-item::before {
+      content:''; position:absolute; left:5px; top:0; bottom:0;
+      width:2px; background:var(--border2);
+    }
+    .tl-item:first-child::before { top:50%; }
+    .tl-item:last-child::before { bottom:50%; }
+    .tl-dot {
+      position:absolute; left:0; top:50%; transform:translateY(-50%);
+      width:12px; height:12px; border-radius:50%;
+      background:var(--bg2); border:2px solid var(--w25);
+      transition:all .3s ease;
+    }
+    .tl-item.now .tl-dot { border-color:var(--teal); background:var(--teal); box-shadow:0 0 0 4px var(--tealglow); }
+    .tl-meta { flex:1; }
+    .tl-role { font-family:var(--font-head); font-size:.92rem; font-weight:700; color:var(--w80); }
+    .tl-item.now .tl-role { color:var(--white); }
+    .tl-date { font-family:var(--font-mono); font-size:.68rem; color:var(--w50); margin-top:2px; }
+    .tl-now-chip {
+      font-family:var(--font-mono); font-size:.6rem; letter-spacing:1px;
+      color:var(--teal); border:1px solid rgba(45,212,191,.3);
+      background:var(--tealglow); padding:3px 9px; border-radius:50px;
+      display:inline-flex; align-items:center; gap:5px;
+    }
 
     .etabs { display:flex; gap:.6rem; margin-bottom:2.5rem; flex-wrap:wrap; }
     .etab {
@@ -334,6 +374,7 @@
       transition:all .4s ease;
     }
     .xcard:hover { border-color:rgba(124,106,247,.35); box-shadow:0 0 40px var(--glow2); }
+    @media(max-width:600px){ .xcard{padding:1.5rem;} }
 
     .xbadge {
       display:inline-flex; align-items:center; gap:7px;
@@ -348,11 +389,40 @@
     .x-role { font-size:.85rem; color:var(--accent2); font-weight:600; font-family:var(--font-mono); margin-bottom:1.2rem; }
     .x-desc { font-size:.88rem; color:var(--w50); line-height:1.85; margin-bottom:1.5rem; }
 
+    /* International / onsite assignment banner */
+    .xonsite {
+      display:flex; align-items:flex-start; gap:1.1rem;
+      background:linear-gradient(135deg, var(--tealglow), var(--glow2));
+      border:1px solid rgba(45,212,191,.25);
+      border-radius:var(--r); padding:1.4rem; margin-bottom:1.5rem;
+      position:relative; overflow:hidden;
+    }
+    .xonsite::after {
+      content:'\f0ac'; font-family:'Font Awesome 6 Free'; font-weight:900;
+      position:absolute; right:-10px; bottom:-16px; font-size:5rem;
+      color:rgba(45,212,191,.06); pointer-events:none;
+    }
+    .xonsite-ico {
+      width:48px; height:48px; flex-shrink:0;
+      background:rgba(45,212,191,.12); border:1px solid rgba(45,212,191,.3);
+      border-radius:var(--r); display:flex; align-items:center; justify-content:center;
+      color:var(--teal); font-size:1.2rem;
+    }
+    .xonsite-body { flex:1; position:relative; z-index:1; }
+    .xonsite-label { font-family:var(--font-mono); font-size:.63rem; color:var(--teal); letter-spacing:2px; margin-bottom:.4rem; }
+    .xonsite-title {
+      font-family:var(--font-head); font-size:.98rem; font-weight:700; color:var(--white);
+      margin-bottom:.35rem; display:flex; align-items:center; gap:9px; flex-wrap:wrap;
+    }
+    .xonsite-flag { font-size:1.15rem; line-height:1; }
+    .xonsite-dates { font-family:var(--font-mono); font-size:.72rem; color:var(--accent2); margin-bottom:.55rem; }
+    .xonsite-desc { font-size:.84rem; color:var(--w50); line-height:1.75; }
+
     .xresp {
       background:var(--w05); border:1px solid var(--border); border-radius:var(--r);
       padding:1.4rem; margin-bottom:1.4rem;
     }
-    .xresp-ttl { font-family:var(--font-mono); font-size:.65rem; color:var(--w50); letter-spacing:2px;  margin-bottom:.9rem; }
+    .xresp-ttl { font-family:var(--font-mono); font-size:.65rem; color:var(--w50); letter-spacing:2px; margin-bottom:.9rem; }
     .rlist { list-style:none; }
     .rlist li {
       display:flex; align-items:flex-start; gap:9px;
@@ -510,7 +580,7 @@
     .toolcard:hover { border-color:rgba(124,106,247,.35); transform:translateY(-5px); box-shadow:0 12px 32px rgba(0,0,0,.3); }
     .toolcard i { font-size:1.7rem; color:var(--accent2); display:block; margin-bottom:.7rem; transition:all .4s; }
     .toolcard:hover i { transform:scale(1.15) rotate(10deg); color:var(--teal); }
-    .toolcard span { font-family:var(--font-mono); font-size:.7rem; color:var(--w50); letter-spacing:.5px;  }
+    .toolcard span { font-family:var(--font-mono); font-size:.7rem; color:var(--w50); letter-spacing:.5px; }
 
     /* ── CONTACT ── */
     #contact { background:var(--bg); }
@@ -545,82 +615,8 @@
       font-size:1rem; color:var(--accent2); flex-shrink:0; transition:all .4s;
     }
     .citem:hover .citem-ico { transform:scale(1.1) rotate(-8deg); }
-    .citem-lbl { font-family:var(--font-mono); font-size:.64rem; color:var(--w25); letter-spacing:2px;  margin-bottom:.3rem; }
+    .citem-lbl { font-family:var(--font-mono); font-size:.64rem; color:var(--w25); letter-spacing:2px; margin-bottom:.3rem; }
     .citem-val { font-weight:600; font-size:.88rem; color:var(--white); word-break:break-all; }
-
-    /* ── MODAL ── */
-    .modal-ov {
-      position:fixed; inset:0; background:rgba(0,0,0,.9);
-      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-      z-index:2000; display:flex; align-items:center; justify-content:center;
-      padding:1.5rem; opacity:0; pointer-events:none; transition:opacity .3s;
-    }
-    .modal-ov.open { opacity:1; pointer-events:auto; }
-    .mbox {
-      background:var(--bg3); border:1px solid var(--border2);
-      border-radius:var(--r2); width:100%; max-width:520px;
-      transform:translateY(24px) scale(.96);
-      transition:transform .35s var(--ease); overflow:hidden;
-      box-shadow:0 24px 60px rgba(0,0,0,.6);
-    }
-    .modal-ov.open .mbox { transform:translateY(0) scale(1); }
-    .mhead {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:1.5rem 1.75rem; border-bottom:1px solid var(--border);
-      background:linear-gradient(135deg,var(--bg3),var(--bg2));
-    }
-    .mhead-title { font-family:var(--font-head); font-size:1rem; font-weight:700; color:var(--white); display:flex; align-items:center; gap:9px; }
-    .mhead-title i { color:var(--accent2); }
-    .mbtn-close {
-      background:none; border:none; color:var(--w50); cursor:pointer;
-      font-size:1.1rem; padding:4px 8px; border-radius:var(--r); transition:all .3s;
-    }
-    .mbtn-close:hover { color:var(--accent2); background:var(--w05); }
-    .mbody { padding:1.6rem 1.75rem; }
-    .fg { margin-bottom:1.2rem; }
-    .flbl { display:block; font-family:var(--font-mono); font-size:.7rem; color:var(--w50); letter-spacing:1px;  margin-bottom:.45rem; }
-    .fctrl {
-      width:100%; background:var(--w05); border:1px solid var(--border2);
-      border-radius:var(--r); color:var(--white); font-size:.88rem;
-      font-family:var(--font-body); padding:10px 14px; outline:none;
-      transition:all .3s; resize:vertical;
-    }
-    .fctrl:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--glow2); }
-    .fctrl::placeholder { color:var(--w25); }
-    textarea.fctrl { min-height:110px; }
-    .mfoot {
-      display:flex; align-items:center; justify-content:flex-end; gap:.9rem;
-      padding:1.3rem 1.75rem; border-top:1px solid var(--border);
-    }
-    .mbtn-cancel {
-      background:none; border:1px solid var(--border2); color:var(--w50);
-      cursor:pointer; font-size:.85rem; font-weight:500; padding:9px 20px;
-      border-radius:var(--r); transition:all .3s; font-family:var(--font-body);
-      letter-spacing:.3px;
-    }
-    .mbtn-cancel:hover { border-color:var(--accent); color:var(--accent2); }
-    .mbtn-send {
-      background:var(--accent); color:var(--white); border:none;
-      cursor:pointer; font-size:.85rem; font-weight:700; padding:9px 22px;
-      border-radius:var(--r); transition:all .4s var(--ease); font-family:var(--font-body);
-      display:flex; align-items:center; gap:7px; letter-spacing:.3px;
-    }
-    .mbtn-send:hover { background:var(--accent2); transform:translateY(-2px); box-shadow:0 8px 24px var(--glow); }
-    .mbtn-send:disabled { opacity:.6; cursor:not-allowed; transform:none; }
-
-    .fsuccess { text-align:center; padding:2.5rem; }
-    .fsuccess i { font-size:2.8rem; color:var(--teal); margin-bottom:1rem; display:block; animation:bIn .5s ease; }
-    @keyframes bIn { 0%{transform:scale(0)} 70%{transform:scale(1.15)} 100%{transform:scale(1)} }
-    .fsuccess h4 { font-family:var(--font-head); font-weight:700; font-size:1.1rem; color:var(--white); margin-bottom:.4rem; }
-    .fsuccess p { font-size:.85rem; color:var(--w50); }
-
-    .ferr {
-      background:rgba(255,80,80,.08); border:1px solid rgba(255,80,80,.25);
-      border-radius:var(--r); padding:10px 14px; font-size:.82rem; color:#ff8888;
-      margin-bottom:1rem; display:none; align-items:center; gap:7px;
-    }
-    .ferr.show { display:flex; animation:shake .4s ease; }
-    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
 
     /* ── FOOTER ── */
     footer {
@@ -666,7 +662,7 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
   </div>
   <div class="nav-mob" id="navMob">
     <a href="#about">About</a>
@@ -682,25 +678,22 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="hero-badge"><span class="pulse-dot"></span>Available for opportunities</div>
+        <div class="hero-badge"><span class="pulse-dot"></span>Open To Opportunities</div>
         <h1 class="hero-name">Pradeep<br>Devarasu</h1>
-        <p class="hero-role">// Junior Software Developer</p>
-        <p class="hero-desc">Results-driven Junior Software Developer with nearly 3 years of hands-on experience in full-stack application development, including internship and industry experience. Skilled in C#, ASP.NET Core Web API, ReactJS, AngularJS, PostgreSQL, and Micro Frontend Architecture.</p>
+        <p class="hero-role">// Senior Software Developer</p>
+        <p class="hero-desc">Results-driven Senior Software Developer with over 3 years of hands-on experience in full-stack application development, including international onsite delivery in Mozambique. Skilled in C#, ASP.NET Core Web API, ReactJS, AngularJS, PostgreSQL, and Micro Frontend Architecture, with a focus on scalable enterprise solutions and technical leadership.</p>
         <div class="hero-btns">
           <a href="https://linkedin.com/in/pradeep-devarasu" target="_blank" class="btn-prim">
             <i class="fab fa-linkedin"></i> Get In Touch
           </a>
-          <!-- <a href="https://linkedin.com/in/pradeep-devarasu" target="_blank" class="btn-out">
-            <i class="fas fa-paper-plane"></i> Email Me
-          </a> -->
         </div>
         <div class="hero-stats">
           <div class="rv">
-            <div class="stat-num">3</div>
+            <div class="stat-num">3+</div>
             <div class="stat-lbl">Years Experience</div>
           </div>
           <div class="rv d2">
-            <div class="stat-num">4+</div>
+            <div class="stat-num">5+</div>
             <div class="stat-lbl">Live Projects</div>
           </div>
           <div class="rv d3">
@@ -714,7 +707,7 @@
         <div class="hcard-top">
           <div class="avatar">PD</div>
           <div class="av-name">Pradeep Devarasu</div>
-          <div class="av-sub">Junior Software Developer</div>
+          <div class="av-sub">Senior Software Developer</div>
         </div>
         <div class="hcard-body">
           <div class="irow"><i class="fas fa-map-marker-alt"></i><span>133, Main Road, Siruvalur, Gobichettipalayam – 638054</span></div>
@@ -733,7 +726,7 @@
     <div class="line rv"></div>
     <div class="sec-tag rv">About</div>
     <h2 class="sec-title rv">About Me</h2>
-    <p class="sec-sub rv-l">Results-driven Junior Software Developer experienced in ERP solutions, API integration, responsive UI development, and enterprise application enhancements across Healthcare, Store Management, Sales ERP, and business applications. Strong problem-solving abilities with experience in Agile methodologies, team collaboration, and delivering scalable software solutions.</p>
+    <p class="sec-sub rv-l">Results-driven Senior Software Developer experienced in ERP solutions, API integration, responsive UI development, and enterprise application enhancements across Healthcare, Store Management, Sales ERP, and business applications. Strong problem-solving abilities with experience in Agile methodologies, technical leadership, international onsite delivery, and shipping scalable software solutions.</p>
 
     <div class="row">
       <div class="col-md-6 col-lg-4">
@@ -863,20 +856,104 @@
     <div class="line rv"></div>
     <div class="sec-tag rv">Career</div>
     <h2 class="sec-title rv">Professional Experience</h2>
-    <p class="sec-sub rv-l">My journey building real-world software solutions at GoZoBee Private Limited.</p>
+    <p class="sec-sub rv-l">My journey building real-world software solutions at GoZoBee Private Limited — from intern to Senior Software Developer.</p>
+
+    <!-- Career timeline -->
+    <div class="timeline rv">
+      <div class="tl-item now">
+        <span class="tl-dot"></span>
+        <div class="tl-meta">
+          <div class="tl-role">Senior Software Developer</div>
+          <div class="tl-date">Jun 2026 – Present</div>
+        </div>
+        <span class="tl-now-chip"><span class="pulse-dot" style="width:6px;height:6px;"></span> Now</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-dot"></span>
+        <div class="tl-meta">
+          <div class="tl-role">Junior Software Developer</div>
+          <div class="tl-date">Jun 2025 – May 2026</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-dot"></span>
+        <div class="tl-meta">
+          <div class="tl-role">Full Stack Developer Intern</div>
+          <div class="tl-date">May 2023 – May 2025</div>
+        </div>
+      </div>
+    </div>
 
     <div class="etabs rv">
-      <button class="etab active" data-tab="exp1">Junior Developer</button>
+      <button class="etab active" data-tab="exp0">Senior Developer</button>
+      <button class="etab" data-tab="exp1">Junior Developer</button>
       <button class="etab" data-tab="exp2">Internship</button>
     </div>
 
-    <!-- Junior Developer -->
-    <div class="epanel active" id="exp1">
+    <!-- Senior Software Developer -->
+    <div class="epanel active" id="exp0">
       <div class="xcard rv">
         <div class="xbadge"><span class="pulse-dot" style="width:6px;height:6px;"></span> Current Role</div>
         <div class="x-co">GoZoBee Private Limited</div>
-        <div class="x-role">Junior Software Developer &nbsp;·&nbsp; 1 June 2025 – Present</div>
-        <div class="x-desc">Working as a Junior Software Developer focused on full-stack application development, feature implementation, API integration, and enterprise software solutions.</div>
+        <div class="x-role">Senior Software Developer &nbsp;·&nbsp; 1 June 2026 – Present</div>
+        <div class="x-desc">Leading full-stack development of enterprise ERP solutions, owning end-to-end feature delivery, architecture decisions, and technical guidance across the team. Delivered client-side implementation onsite in Mozambique, driving go-live readiness and production support for international deployments.</div>
+
+        <!-- International onsite assignment -->
+        <div class="xonsite">
+          <div class="xonsite-ico"><i class="fas fa-plane-departure"></i></div>
+          <div class="xonsite-body">
+            <div class="xonsite-label">International Onsite Assignment</div>
+            <div class="xonsite-title"><span class="xonsite-flag">🇲🇿</span> Mozambique — Onsite Delivery</div>
+            <div class="xonsite-dates">14 June 2026 – 6 September 2026</div>
+            <div class="xonsite-desc">Deployed onsite in Mozambique to lead client-side ERP implementation, go-live support, and delivery coordination. Worked directly with stakeholders on requirement finalization, deployment, issue resolution, and user onboarding.</div>
+          </div>
+        </div>
+
+        <div class="xresp">
+          <div class="xresp-ttl">Projects</div>
+          <ul class="rlist">
+            <li><i class="fas fa-chevron-right"></i><span>MOZ Store Management System (ERP) — Onsite Implementation, Mozambique</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Sales ERP Project</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Excel Add-in Project</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>GoZoBee Website UI Modification</span></li>
+          </ul>
+        </div>
+
+        <div class="xresp">
+          <div class="xresp-ttl">Key Responsibilities & Contributions</div>
+          <ul class="rlist">
+            <li><i class="fas fa-chevron-right"></i><span>Leading design and development of scalable ERP modules using ReactJS and Micro Frontend Architecture (MFE)</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Architecting backend services with ASP.NET Core Web API and .NET Core 8 microservices</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Owning end-to-end feature delivery, from requirement analysis to deployment and production support</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Delivering onsite client implementation and go-live support in Mozambique</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Mentoring junior developers and interns, and conducting code reviews to uphold quality standards</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Designing REST APIs and managing reliable frontend-backend data flow</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Building reusable components, dynamic forms, validations, pagination, search filters, and export functionality</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Driving performance optimization, debugging, and production issue resolution</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Collaborating with cross-functional teams and stakeholders in an Agile delivery model</span></li>
+          </ul>
+        </div>
+
+        <div class="xtags">
+          <span class="xtag">ReactJS</span>
+          <span class="xtag">MFE</span>
+          <span class="xtag">ASP.NET Core</span>
+          <span class="xtag">.NET 8</span>
+          <span class="xtag">REST API</span>
+          <span class="xtag">ERP</span>
+          <span class="xtag">Onsite Delivery</span>
+          <span class="xtag">Mentoring</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Junior Developer -->
+    <div class="epanel" id="exp1">
+      <div class="xcard rv">
+        <div class="xbadge old">Previous Role</div>
+        <div class="x-co">GoZoBee Private Limited</div>
+        <div class="x-role">Junior Software Developer &nbsp;·&nbsp; 1 June 2025 – 31 May 2026</div>
+        <div class="x-desc">Worked as a Junior Software Developer focused on full-stack application development, feature implementation, API integration, and enterprise software solutions.</div>
 
         <div class="xresp">
           <div class="xresp-ttl">Projects</div>
@@ -889,18 +966,18 @@
         </div>
 
         <div class="xresp">
-          <div class="xresp-ttl">Key Responsibilities &amp; Contributions</div>
+          <div class="xresp-ttl">Key Responsibilities & Contributions</div>
           <ul class="rlist">
-            <li><i class="fas fa-chevron-right"></i><span>Developing scalable and responsive UI screens using ReactJS and Micro Frontend Architecture (MFE)</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Working with ASP.NET Core Web API and .NET Core 8 microservices</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Implementing new modules and enhancing existing functionalities</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Integrating REST APIs and managing frontend-backend data flow</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Developing reusable components, dynamic forms, validations, pagination, search filters, and export functionality</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Supporting implementation activities for ERP modules</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Participating in debugging, issue resolution, and production support</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Working on Excel Add-in integrations and business workflow enhancements</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Contributing to UI enhancements and modifications for the GoZoBee Website</span></li>
-            <li><i class="fas fa-chevron-right"></i><span>Supporting implementation activities in the Sales ERP Project</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Developed scalable and responsive UI screens using ReactJS and Micro Frontend Architecture (MFE)</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Worked with ASP.NET Core Web API and .NET Core 8 microservices</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Implemented new modules and enhanced existing functionalities</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Integrated REST APIs and managed frontend-backend data flow</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Built reusable components, dynamic forms, validations, pagination, search filters, and export functionality</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Supported implementation activities for ERP modules</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Participated in debugging, issue resolution, and production support</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Worked on Excel Add-in integrations and business workflow enhancements</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Contributed to UI enhancements and modifications for the GoZoBee Website</span></li>
+            <li><i class="fas fa-chevron-right"></i><span>Supported implementation activities in the Sales ERP Project</span></li>
           </ul>
         </div>
 
@@ -925,7 +1002,7 @@
         <div class="x-desc">Underwent intensive full-stack development training and gained hands-on experience by working on a live Healthcare and Life Science Management project. This period helped build a strong foundation in modern web development technologies and real-time software development practices.</div>
 
         <div class="xresp">
-          <div class="xresp-ttl">Learning &amp; Training Areas</div>
+          <div class="xresp-ttl">Learning & Training Areas</div>
           <ul class="rlist">
             <li><i class="fas fa-chevron-right"></i><span>C#, ASP.NET Core MVC, ASP.NET Core Web API</span></li>
             <li><i class="fas fa-chevron-right"></i><span>PostgreSQL database design and query optimization</span></li>
@@ -938,7 +1015,7 @@
         </div>
 
         <div class="xresp">
-          <div class="xresp-ttl">Key Responsibilities &amp; Contributions</div>
+          <div class="xresp-ttl">Key Responsibilities & Contributions</div>
           <ul class="rlist">
             <li><i class="fas fa-chevron-right"></i><span>Developed and implemented web applications using C#, ASP.NET Core Web API, and AngularJS</span></li>
             <li><i class="fas fa-chevron-right"></i><span>Designed and built responsive UI components using HTML, CSS, Bootstrap, and TypeScript</span></li>
@@ -983,7 +1060,7 @@
             <div class="p-title">MOZ Store Management System (ERP)</div>
           </div>
           <div class="pcard-body">
-            <p class="p-desc">Scalable ERP platform for store management with responsive UI screens, dynamic forms, validations, pagination, search filters, and export functionality using Micro Frontend Architecture.</p>
+            <p class="p-desc">Scalable ERP platform for store management with responsive UI screens, dynamic forms, validations, pagination, search filters, and export functionality using Micro Frontend Architecture. Delivered onsite in Mozambique.</p>
             <div class="ptechs">
               <span class="ptech">ReactJS</span>
               <span class="ptech">MFE</span>
@@ -1039,7 +1116,7 @@
           <div class="pcard-head">
             <div class="p-num">Project 04</div>
             <div class="p-ico"><i class="fas fa-heartbeat"></i></div>
-            <div class="p-title">Healthcare &amp; Life Science Management</div>
+            <div class="p-title">Healthcare & Life Science Management</div>
           </div>
           <div class="pcard-body">
             <p class="p-desc">Live healthcare management system with dashboards, workflow modules, OAuth-based authentication, and PostgreSQL-optimized database performance.</p>
@@ -1080,7 +1157,7 @@
   <div class="wrap">
     <div class="line rv"></div>
     <div class="sec-tag rv">Credentials</div>
-    <h2 class="sec-title rv">Certifications &amp; Tools</h2>
+    <h2 class="sec-title rv">Certifications & Tools</h2>
     <p class="sec-sub rv-l">Professional certifications and tools that validate my technical expertise.</p>
 
     <div class="sub-head rv">Certifications</div>
@@ -1088,7 +1165,7 @@
       <!-- Dynamically rendered by JS -->
     </div>
 
-    <div class="sub-head rv">Tools &amp; Technologies</div>
+    <div class="sub-head rv">Tools & Technologies</div>
     <div class="row">
       <div class="col-6 col-sm-4 col-md-4 col-lg-3"><div class="toolcard rv"><i class="fab fa-react"></i><span>ReactJS</span></div></div>
       <div class="col-6 col-sm-4 col-md-4 col-lg-3"><div class="toolcard rv d1"><i class="fab fa-microsoft"></i><span>ASP.NET</span></div></div>
@@ -1184,7 +1261,7 @@
   <div class="wrap">
     <div class="footer-in">
       <div class="footer-logo"><span>&lt;</span>Pradeep<span>/&gt;</span></div>
-      <div class="footer-copy">© 2025 Pradeep Devarasu. All rights reserved.</div>
+      <div class="footer-copy">© 2026 Pradeep Devarasu. All rights reserved.</div>
       <div class="footer-soc">
         <a href="https://linkedin.com/in/pradeep-devarasu" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
         <a href="mailto:pradeep.devarasu24@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
@@ -1197,11 +1274,11 @@
 <script>
   // ═══════════════════════════════════════════════════════
   //  CERTIFICATE DATA
-  //  Paste the full Google Drive share link OR just the File ID
+  //  Paste the full Google Drive share link OR just the File ID.
   //  Both formats are supported:
   //    Full URL: 'https://drive.google.com/file/d/1aBcXyz.../view?usp=sharing'
   //    File ID only: '1aBcXyz...'
-  //  To add a new certificate: add a new object to this array
+  //  To add a new certificate: add a new object to this array.
   // ═══════════════════════════════════════════════════════
   const CERTIFICATES = [
     {
@@ -1261,28 +1338,23 @@
 
   function extractDriveId(value) {
     if (!value) return '';
-    // If it's a full URL, extract the ID between /d/ and the next /
     const match = value.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    return match ? match[1] : value; // fallback: treat value as raw ID
+    return match ? match[1] : value;
   }
 
   function openCertModal(index) {
     const cert = CERTIFICATES[index];
     if (!cert) return;
 
-    // Update modal header
     certModalTitle.textContent = cert.name;
     certModalSub.textContent   = cert.issuer;
     certModalIco.innerHTML     = `<i class="${cert.icon}"></i>`;
 
-    // Show modal
     certModal.classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    // Extract clean File ID from full URL or raw ID
     const fileId = extractDriveId(cert.driveId);
 
-    // Check if Drive ID is set
     if (!fileId || fileId.startsWith('YOUR_')) {
       certLoading.style.display  = 'none';
       certIframe.style.display   = 'none';
@@ -1303,16 +1375,13 @@
       return;
     }
 
-    // Hide any no-link placeholder
     const noLink = document.getElementById('certModalBody').querySelector('.cert-no-link');
     if (noLink) noLink.style.display = 'none';
 
-    // Build clean preview & open URLs using extracted File ID
     const previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
     const openUrl    = `https://drive.google.com/file/d/${fileId}/view`;
     certOpenBtn.href = openUrl;
 
-    // Show loading, load iframe
     certLoading.style.display = 'flex';
     certIframe.style.display  = 'none';
     certIframe.src = '';
@@ -1333,13 +1402,11 @@
     }, 300);
   }
 
-  // Click on cert cards (event delegation)
   certGrid.addEventListener('click', e => {
     const card = e.target.closest('[data-cert-index]');
     if (card) openCertModal(parseInt(card.dataset.certIndex));
   });
 
-  // Keyboard accessibility
   certGrid.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') {
       const card = e.target.closest('[data-cert-index]');
@@ -1347,7 +1414,6 @@
     }
   });
 
-  // Close modal
   certModalClose.addEventListener('click', closeCertModal);
   certModal.addEventListener('click', e => { if (e.target === certModal) closeCertModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCertModal(); });
